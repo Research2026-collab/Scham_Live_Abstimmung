@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scham – ein erstes Meinungsbild</title>
+<style>
+:root{--burg:#642239;--burg2:#421827;--apricot:#ffad8c;--cream:#f5dacc;--ink:#1d1719;--concrete:#a8a4a0;--line:rgba(255,218,204,.28)}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--burg);color:var(--cream);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 20% 30%,#fff 0 1px,transparent 1.3px),radial-gradient(circle at 80% 70%,#000 0 1px,transparent 1.5px);background-size:17px 19px,23px 29px;mix-blend-mode:soft-light}
+.wrap{max-width:1100px;margin:auto;padding:34px 24px 48px}.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:16px}.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:.76rem;color:var(--apricot)}h1{font-size:clamp(2rem,5vw,4.4rem);line-height:.98;margin:.35rem 0 0;max-width:850px}.count{white-space:nowrap;color:var(--apricot);font-weight:700}
+.stage{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:34px;align-items:stretch;margin-top:32px}.concrete{min-height:490px;border-radius:2px;position:relative;overflow:hidden;background:linear-gradient(120deg,rgba(255,255,255,.14),transparent 25%),linear-gradient(160deg,#b5b1ac,#8f8b87 58%,#6e6967);box-shadow:inset -45px 0 70px rgba(20,12,14,.2)}.concrete:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(103deg,transparent 0 34px,rgba(45,36,38,.055) 35px 36px,transparent 37px 72px),radial-gradient(ellipse at 72% 22%,rgba(255,244,225,.42),transparent 24%);mix-blend-mode:multiply}.mark{position:absolute;left:8%;top:12%;font-family:Georgia,serif;font-size:clamp(5rem,14vw,11rem);color:rgba(100,34,57,.82);z-index:1;transform:rotate(-4deg)}.shadow{position:absolute;width:42%;height:125%;right:4%;top:-10%;background:rgba(42,23,30,.3);transform:skewX(-16deg);filter:blur(2px)}
+.card{display:flex;flex-direction:column;justify-content:center;min-width:0}.num{color:var(--apricot);font-size:.85rem;font-weight:800;letter-spacing:.12em}.question{font-family:Georgia,serif;font-size:clamp(1.55rem,3vw,2.55rem);line-height:1.12;margin:12px 0 34px}.scaleLabels{display:flex;justify-content:space-between;gap:12px;font-size:.82rem;color:#edd0c4}.range{width:100%;accent-color:var(--apricot);margin:13px 0 6px;height:32px}.value{font-size:2rem;color:var(--apricot);font-weight:800;margin:4px 0 20px}.actions{display:flex;gap:10px;flex-wrap:wrap}button{border:1px solid var(--apricot);background:transparent;color:var(--cream);padding:12px 18px;min-height:46px;font-weight:800;cursor:pointer}button.primary{background:var(--apricot);color:var(--burg2)}button:disabled{opacity:.4;cursor:not-allowed}.status{min-height:24px;margin-top:14px;color:#f4c9b7;font-size:.9rem}
+.done{max-width:720px;margin:70px auto;text-align:center}.done h2{font-family:Georgia,serif;font-size:clamp(2rem,5vw,4rem);margin:.2em 0}.admin{margin-top:30px}.adminHead{display:flex;justify-content:space-between;gap:20px;align-items:center}.result{padding:22px 0;border-top:1px solid var(--line)}.rtitle{font-family:Georgia,serif;font-size:1.18rem;line-height:1.25}.meta{font-size:.82rem;color:#e8c5b8;margin:7px 0 12px}.axis{height:34px;position:relative;border-top:2px solid rgba(245,218,204,.5);margin-top:20px}.dot{position:absolute;top:-7px;width:12px;height:12px;border-radius:50%;background:var(--cream);transform:translateX(-50%);opacity:.72}.mean{position:absolute;top:-13px;width:4px;height:25px;background:var(--apricot);transform:translateX(-50%)}.axisLabels{display:flex;justify-content:space-between;font-size:.75rem;color:#d9b7aa}.small{font-size:.82rem;color:#d9b7aa}
+@media(max-width:760px){.stage{grid-template-columns:1fr}.concrete{min-height:190px}.mark{font-size:7rem}.top{align-items:flex-start;flex-direction:column}.wrap{padding:24px 18px}.question{margin-bottom:22px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><div><div class="eyebrow">Online-Seminar · Einstieg</div><h1>Scham – ein erstes Meinungsbild</h1></div><div class="count" id="count">1 / 7</div></header>
+  <section id="voteView" class="stage">
+    <div class="concrete" aria-hidden="true"><div class="mark">?</div><div class="shadow"></div></div>
+    <div class="card">
+      <div class="num" id="num">AUSSAGE 01</div>
+      <div class="question" id="question"></div>
+      <div class="scaleLabels"><span>stimme gar nicht zu</span><span>stimme völlig zu</span></div>
+      <input class="range" id="range" type="range" min="0" max="100" step="1" value="50" aria-label="Zustimmung von 0 bis 100">
+      <div class="value"><span id="value">50</span><span class="small"> / 100</span></div>
+      <div class="actions"><button id="back">Zurück</button><button class="primary" id="next">Stimme speichern</button></div>
+      <div class="status" id="status" aria-live="polite"></div>
+    </div>
+  </section>
+  <section id="doneView" class="done" hidden><div class="eyebrow">Danke</div><h2>Deine Positionen sind gespeichert.</h2><p>Die Ergebnisse werden anschließend gemeinsam im Seminar betrachtet.</p></section>
+  <section id="adminView" class="admin" hidden><div class="adminHead"><div><div class="eyebrow">Live-Auswertung</div><h2>Meinungsbild der Gruppe</h2></div><div id="sessions" class="count"></div></div><div id="results"></div><div id="adminStatus" class="status"></div></section>
+</main>
+<script>
+(() => {
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyhmG-S_JeNW0T7TbblTxe3bkxTRfUDm7rPP_usYrauLPH_5fHN84MtteFxEu_kFgPM-Q/exec";
+  const questions = [
+    'Scham ist vor allem ein negatives Gefühl.',
+    'Wenn Menschen keine Scham erleben würden, wären sie gesünder und glücklicher.',
+    'Scham ist ein ausschließlich individuelles Gefühl.',
+    'Frauen empfinden mehr Scham als Männer.',
+    'Scham ist in allen Kulturen im Wesentlichen dasselbe.',
+    'Eine Gesellschaft ohne Scham und Beschämung wäre eine bessere Gesellschaft.',
+    'Öffentliche Beschämung kann ein legitimes Mittel sein, um gesellschaftliche Normen durchzusetzen.'
+  ];
+  const admin = new URLSearchParams(location.search).get('admin') === '1';
+  const els = Object.fromEntries(['voteView','doneView','adminView','count','num','question','range','value','back','next','status','results','sessions','adminStatus'].map(id=>[id,document.getElementById(id)]));
+  const session = (()=>{let x=localStorage.getItem('schamVoteSession');if(!x){x='s_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10);localStorage.setItem('schamVoteSession',x)}return x})();
+  let idx=0; const answers=Array(questions.length).fill(50);
+  function configured(){return /^https:\/\/script\.google\.com\//.test(SCRIPT_URL)}
+  function render(){els.count.textContent=`${idx+1} / ${questions.length}`;els.num.textContent=`AUSSAGE ${String(idx+1).padStart(2,'0')}`;els.question.textContent=questions[idx];els.range.value=answers[idx];els.value.textContent=answers[idx];els.back.disabled=idx===0;els.next.textContent=idx===questions.length-1?'Abstimmung abschließen':'Stimme speichern';els.status.textContent=''}
+  function jsonp(params){return new Promise((resolve,reject)=>{if(!configured())return reject(new Error('SCRIPT_URL ist noch nicht eingetragen.'));const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);const s=document.createElement('script');const timer=setTimeout(()=>{cleanup();reject(new Error('Zeitüberschreitung beim Serverkontakt.'))},10000);function cleanup(){clearTimeout(timer);delete window[cb];s.remove()}window[cb]=data=>{cleanup();resolve(data)};s.onerror=()=>{cleanup();reject(new Error('Server nicht erreichbar.'))};const q=new URLSearchParams({...params,callback:cb});s.src=SCRIPT_URL+'?'+q.toString();document.body.appendChild(s)})}
+  async function save(){els.next.disabled=true;els.status.textContent='wird gespeichert …';try{const data=await jsonp({action:'vote',qid:String(idx+1),value:String(answers[idx]),session});if(!data.ok)throw new Error(data.error||'Speichern fehlgeschlagen.');if(idx===questions.length-1){els.voteView.hidden=true;els.doneView.hidden=false;els.count.textContent='7 / 7'}else{idx++;render()}}catch(e){els.status.textContent=e.message}finally{els.next.disabled=false}}
+  els.range.addEventListener('input',()=>{answers[idx]=Number(els.range.value);els.value.textContent=answers[idx]});els.next.addEventListener('click',save);els.back.addEventListener('click',()=>{if(idx>0){idx--;render()}});
+  async function loadResults(){try{const d=await jsonp({action:'results'});if(!d.ok)throw new Error(d.error||'Auswertung fehlgeschlagen.');els.sessions.textContent=`${d.totalSessions} Teilnehmende`;els.results.innerHTML=d.results.map(r=>{const dots=r.values.map(v=>`<span class="dot" style="left:${Math.max(0,Math.min(100,v))}%"></span>`).join('');const mean=r.mean==null?'':`<span class="mean" style="left:${r.mean}%" title="Mittelwert ${r.mean}"></span>`;return `<article class="result"><div class="rtitle">${r.qid}. ${r.question}</div><div class="meta">${r.n} Antworten${r.mean==null?'':` · Mittelwert ${r.mean}`}</div><div class="axis">${dots}${mean}</div><div class="axisLabels"><span>stimme gar nicht zu</span><span>stimme völlig zu</span></div></article>`}).join('');els.adminStatus.textContent='Live · Aktualisierung alle 5 Sekunden'}catch(e){els.adminStatus.textContent=e.message}}
+  if(admin){els.voteView.hidden=true;els.adminView.hidden=false;els.count.textContent='LIVE';loadResults();setInterval(loadResults,5000)}else{render()}
+})();
+</script>
+</body>
+</html>
